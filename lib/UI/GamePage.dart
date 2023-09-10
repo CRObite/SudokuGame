@@ -49,6 +49,8 @@ class _GamePageState extends State<GamePage> {
 
     if(StaticThings.selectedRow != -1 && StaticThings.selectedColumn != -1){
       widget.sudokuCard.sudokuBoard[StaticThings.selectedRow][StaticThings.selectedColumn] = pickedNumber;
+      BackConnection().updateSudokuValue(StaticThings.currentGameInd!,StaticThings.selectedRow , StaticThings.selectedColumn, pickedNumber, StaticThings.userAccessToken!);
+
       StaticThings.selectedRow = -1;
       StaticThings.selectedColumn = -1;
     }

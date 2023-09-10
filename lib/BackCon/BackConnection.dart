@@ -151,6 +151,30 @@ class BackConnection{
     }
   }
 
+  Future<void> updateSudokuValue(int gameId,int row,int col,int value, String jwtToken) async {
+    try {
+      Dio dio = Dio();
+      dio.options.headers['Authorization'] = 'Bearer $jwtToken';
+
+      Response response = await dio.post(
+        '${StaticThings.ipAddress}${StaticThings.uploadImageEndpoint}',
+        data: {
+          'gameId': gameId,
+          'row': row,
+          'col': col,
+          'newValue': value,
+        },
+      );
+      if (response.statusCode == 200) {
+        print('Image uploaded successfully');
+      } else {
+        print('Image upload failed');
+      }
+    } catch (error) {
+      print('Error uploading image: $error');
+    }
+  }
+
 
 
   Future<List<List<List<int>>>> getSudoku(String level, String jwtToken) async {
